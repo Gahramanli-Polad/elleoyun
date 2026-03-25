@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>🎮 Hand Control Game - Əl İzləmə Oyunu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎮 Hand Control Game</h1>
+            <div class="status">
+                <span id="connectionStatus">Bağlanır...</span>
+                <span id="clientId" class="client-id"></span>
+                <span id="cameraStatus" class="camera-status">Kamera: Qoşulmur</span>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="game-section">
+                <div class="game-header">
+                    <div class="score-panel">
+                        <div class="score-item">
+                            <span class="label">🏆 Skor:</span>
+                            <span id="score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">❤️ Həyat:</span>
+                            <span id="lives">3</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">⏱️ Vaxt:</span>
+                            <span id="timer">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">🔥 Kombo:</span>
+                            <span id="combo">0</span>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button id="startGame" class="btn-game">🎮 Oyunu Başlat</button>
+                        <button id="pauseGame" class="btn-game">⏸️ Fasilə</button>
+                        <button id="resetGame" class="btn-game">🔄 Yenilə</button>
+                    </div>
+                </div>
+                
+                <div class="game-canvas-container">
+                    <canvas id="gameCanvas"></canvas>
+                    <div class="game-overlay" id="gameOverlay">
+                        <div class="overlay-content">
+                            <h2 id="overlayTitle">🎮 Hand Control Game</h2>
+                            <p id="overlayMessage">Əlinizi hərəkət etdirərək oyunu idarə edin!</p>
+                            <button id="overlayButton" class="btn-start">Başla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="camera-mini-section">
+                <div class="camera-header">
+                    <h4>� Əl İzləmə</h4>
+                    <button id="startCamera" class="btn-small">Kamera</button>
+                </div>
+                <div class="video-container-mini">
+                    <video id="videoElement" autoplay muted></video>
+                    <canvas id="handCanvas" class="hand-overlay-mini"></canvas>
+                    <div class="gesture-indicator-mini">
+                        <span id="currentGesture">Əl gözlənilir...</span>
+                    </div>
+                </div>
+                <div class="game-instructions">
+                    <h5>🎯 Nəzarət:</h5>
+                    <div class="instruction-list">
+                        <div class="instruction">✋ Açıq əl - Atəş aç</div>
+                        <div class="instruction">👊 Qapalı əl - Qorunma</div>
+                        <div class="instruction">☝️ Barmaq - Xüsusi güc</div>
+                        <div class="instruction">🖐️ Hərəkət - Gəmi sür</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-camera-toggle" id="mobileCameraToggle">📷</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
